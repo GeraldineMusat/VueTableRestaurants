@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width">
+    <script src="lib/vue.min.js"></script>
+    <script src="lib/lodash.min.js"></script>
+
+    <script src="js/script.js"></script>
+
+    <link rel="stylesheet" href="css/styles.css">
+
+     <title>JS Bin</title>
+</head>
+<body>
+<div id="app">
+  
+  
+  <h1>Nombre de restaurants total : {{nbRestaurants}}</h1>
+  <h1>Nombre de restaurants par page : {{restaurants.length}}</h1>
+  <label>
+	5
+  </label>
+  <input type="range" min="5" max="100" value="10" v-model="pagesize" v-on:input="onChg(event)">
+  <label>
+	100
+  </label>
+  <br/>
+  <br/>
+  <label>
+    Rechercher : <input type="text" v-on:input="chercherRestaurants" v-model="nameRecherche"> 
+  </label>
+  <br/>
+  <br/>
+    <table>
+     <tr>
+       <th>Nom</th>
+       <th>Cuisine </th>
+       <th>Action </th>
+      </tr>
+      <tbody>
+      <tr 
+          v-for="r,index in restaurants"
+          
+          v-bind:style="{backgroundColor:getColor(index)}"
+          v-bind:class="{bordureRouge:(index === 2)}"
+      >
+        <td>{{r.name}}</td>
+        <td> {{r.cuisine}}</td>
+		<td>  
+			  <button v-on:click="supprimerRestaurant(index)">Delete</button> 
+			  <button v-on:click="modifierRest(index)">Modifier</button> 
+	    </td>
+      </tr>
+      </tbody>
+  </table>
+  
+  <button v-on:click="precedent">Precedent</button>
+  <button v-on:click="suivant">Suivant</button>
+  
+  <form  v-on:submit="ajouterRestaurant(event)">
+  <h3>Ajout restaurants</h3>
+  <label>
+    Nom : <input type="text" name="nom" v-model="name"> 
+  </label>
+  <label>
+    Cuisine : <input type="text" name="cuisine" v-model="cuisine"> 
+  </label>
+
+  <button>Ajouter</button>
+  </form>
+  
+  <form  v-on:submit="modifierRestaurants(event)">
+  <h3>Modification restaurants</h3>
+  <label>
+    Nom : <input type="text" name="nom" v-model="name"> 
+  </label>
+  <label>
+    Cuisine : <input type="text" name="cuisine" v-model="cuisine"> 
+  </label>
+
+  <button>Modifier</button>
+  </form>
+  
+  </div>
+  
+</body>
+</html>
