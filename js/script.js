@@ -7,7 +7,7 @@ function init() {
 	  data: {
 		restaurants : [],
 		cuisine:'',
-		page:1,
+		page:0,
 		pagesize:10,
 		nbRestaurants:0,
 		name:'',
