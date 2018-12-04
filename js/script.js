@@ -151,8 +151,11 @@ function init() {
 			}
 		},
 		suivant(event){ // Pour la pagination page suivante 
-			this.page = this.page + 1;
-			this.getRestaurantsFromServer();
+			let res = Math.round( this.nbRestaurants / this.pagesize ) - 1;
+			if (this.page < res) {
+				this.page = this.page + 1;
+				this.getRestaurantsFromServer();
+			}
 		},
 		onChg(event){ // Pour le slide pour le nombre de restaurants par page 
 			//console.log(this.pagesize);
@@ -160,7 +163,16 @@ function init() {
 		},
 		chercherRestaurants: _.debounce(function () { // Pour chercher les restaurants, avec un temps alloué pour ecrire
 			this.getRestaurantsFromServer();
-		}, 300)
+		}, 300),
+		premiere(event){
+			this.page = 0;
+			this.getRestaurantsFromServer();
+		},
+		derniere(event){
+			let res = this.nbRestaurants / this.pagesize;
+			this.page = Math.round(res) - 1;
+			this.getRestaurantsFromServer();
+		}
 	  }
 	});
 }
