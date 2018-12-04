@@ -145,7 +145,7 @@ function init() {
 		  return (index % 2) ? 'lightBlue' : 'pink';
 		},
 		precedent(event) { // Pour la pagination page precedente
-			if(this.page > 1 ){
+			if(this.page > 0 ){
 				this.page = this.page - 1;
 				this.getRestaurantsFromServer();
 			}
